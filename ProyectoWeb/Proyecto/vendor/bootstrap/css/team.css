@@ -1,0 +1,138 @@
+/*seccion de Equipo*/
+.center__text{
+    text-align: center;
+}
+/* Editar estilos de la pagina formulario */
+.row__container{
+    margin: auto;
+   
+    display: block;
+    border: 40px solid rgb(235, 230, 230);
+    border-radius: 10px;
+    background: rgb(235, 230, 230);;
+
+}
+.button{
+    padding: 10px 20px;
+    background: rgb(5, 172, 223);
+    outline: none;
+    border: none;
+    color: #fff;
+}
+.input__styles{
+    margin-bottom: 30px;
+    background: transparent;
+    outline: none;
+    border:none;
+    border-bottom: solid rgb(0, 195, 255) ;
+}
+
+.input__styles:focus{
+    background: transparent;
+    outline: none;
+    border:none;
+    border-bottom: solid rgb(4, 238, 4);
+
+ 
+}
+.textarea__styles{
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border:none;
+    border-bottom: solid rgb(0, 195, 255) ;
+}
+
+.textarea__styles:focus{
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border:none;
+    border-bottom: solid rgb(4, 238, 4);
+    background: rgba(202, 191, 191, 0.248);
+}
+
+.team-container{
+    margin: auto;
+    width: 88%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    padding: 2%;
+}
+
+.team-container_card, .team-container_img{
+    border-top-right-radius: 20%;
+    border-bottom-left-radius: 20%;
+    border-top-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+}
+
+.team-container_card{
+    padding: 2%;
+    text-align: center;
+    margin: 2%;
+    background-color:rgb(212, 209, 221);
+    border: 1px solid black;
+
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.team-container_card > img{
+    width: 100px;
+}
+
+.p__container{
+    margin: auto;
+    width: 80%;
+    height:10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color:rgba(221, 209, 210, 0.296);
+    border-radius: 40px;
+    color: rgb(0, 0, 0);
+    text-align: justify;
+  
+}
+
+/*seccion footer*/
+.footer{
+    width: 100%;
+    font-size: 20px;
+    height: 5rem;
+    background:#000;
+    color: #fff;
+    display: flex;
+    line-height: 3;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+  @media (max-width: 740px) {
+    .team-container{
+        margin: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        padding: 2%;
+    }
+    .team-container_card{
+        width: 80%;
+        background: chartreuse;
+        padding: 2%;
+        text-align: center;
+        margin: 2%;
+        background:rgb(8, 208, 243);
+        border-radius: 20%;
+        border: 10px solid rgb(230, 238, 233);
+    
+     
+    }
+
+  }
