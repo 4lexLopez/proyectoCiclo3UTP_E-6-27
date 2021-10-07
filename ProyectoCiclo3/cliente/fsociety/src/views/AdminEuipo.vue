@@ -1,0 +1,306 @@
+<template>
+  <div class="container">
+    <div class="contenedor">
+      <h1 class="text-center">integrantes</h1>
+
+      <form
+        @submit.prevent="ModificarIntegrante(editarIntegrante)"
+        v-if="editar"
+      >
+        <h3 class="text-center">Editar equipo</h3>
+
+        <input
+          type="text"
+          
+          placeholder="Nombre"
+          v-model="editarIntegrante.nombre"
+        />
+        <input
+          type="text"
+          class="form-control my-2"
+          placeholder="Apellido"
+          v-model="editarIntegrante.apellido"
+        />
+        <input
+          type="text"
+          class="form-control my-2"
+          placeholder="Cargo"
+          v-model="editarIntegrante.cargo"
+        />
+        <input
+          type="text"
+          class="form-control my-2"
+          placeholder="Pon la Url de tú imagen"
+          v-model="editarIntegrante.imagen"
+        />
+        <button class="btn btn-primary" id="liveAlertBtn " type="submit">
+          Editar
+        </button>
+        <button class=" my-2" type="submit" @click="editar = false">
+          Cancelar
+        </button>
+      </form>
+      <form @submit.prevent="agregarIntegrante()" v-if="!editar">
+        <h3>Agregar un nuevo integrante</h3>
+
+        <input
+          type="text"
+          class="form-control my-2"
+          placeholder="Nombre"
+          v-model="equipo.nombre"
+        />
+        <input
+          type="text"
+          class="form-control my-2"
+          placeholder="Apellido"
+          v-model="equipo.apellido"
+        />
+        <input
+          type="text"
+          class="form-control my-2"
+          placeholder="Cargo"
+          v-model="equipo.cargo"
+        />
+        <input
+          type="text"
+          class="form-control my-2"
+          placeholder="Url de tú imagen"
+          v-model="equipo.imagen"
+        />
+        <button class="btn-success my-2" type="submit">Agregar</button>
+      </form>
+
+      <div class="container">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="btt" scope="col">Editar</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Url imagen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, index) in integrantes" :key="index" class="">
+                <div class="btt">
+                  <td>
+                    <button
+                      class="btn-danger"
+                      @click="eliminarIntegrante(item._id)"
+                    >
+                      Eliminar
+                    </button>
+                    <button
+                      class="btn-warning"
+                      @click="activarEdicion(item._id)"
+                    >
+                      Editar
+                    </button>
+                  </td>
+                </div>
+                <td scope="row">{{ item.nombre }}</td>
+                <td>{{ item.apellido }}</td>
+                <td>{{ item.cargo }}</td>
+                <td class="text-center tamaño">{{ item.imagen }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      integrantes: [],
+      mensaje: { color: "success", texto: "" },
+      dismissSecs: 5,
+      dismissCountDown: 0,
+
+      equipo: { nombre: "", apellido: "", cargo: "", imagen: "" },
+      editar: false,
+      editarIntegrante: {},
+    };
+  },
+
+  created() {
+    this.listarintegrantes();
+  },
+
+  methods: {
+    listarintegrantes() {
+      this.axios
+        .get("/equipo")
+        .then((res) => {
+          console.log(res.data);
+          this.integrantes = res.data;
+        })
+        .catch((e) => {
+          console.log(e.response);
+        });
+    },
+
+    agregarIntegrante() {
+      this.axios
+        .post("/equipo-nuevo", this.equipo)
+        .then((res) => {
+          this.integrantes.push(res.data);
+          this.equipo.nombre = "";
+          this.equipo.apellido = "";
+          this.equipo.cargo = "";
+          this.equipo.imagen = "";
+          this.mensaje.color = "success";
+          this.mensaje.texto = "Integrante Agregado";
+          this.showAlert();
+        })
+        .catch((e) => {
+          console.log(e.response);
+        });
+    },
+
+    eliminarIntegrante(id) {
+      this.axios
+        .delete(`/equipo/${id}`)
+        .then((res) => {
+          const index = this.integrantes.findIndex(
+            (item) => item._id === res.data._id
+          );
+          this.integrantes.splice(index, 1);
+          this.mensaje.color = "success";
+          this.mensaje.texto = "Integrante Eliminado";
+          this.showAlert();
+        })
+        .catch((e) => {
+          console.log(e.response);
+        });
+    },
+
+    activarEdicion(id) {
+      this.editar = true;
+      this.axios
+        .get(`/equipo/${id}`)
+        .then((res) => {
+          this.editarIntegrante = res.data;
+        })
+        .catch((e) => {
+          console.log(e.response);
+        });
+    },
+
+    ModificarIntegrante(item) {
+      this.axios
+        .put(`/equipo/${item._id}`, item)
+        .then((res) => {
+          const index = this.integrantes.findIndex(
+            (n) => n._id === res.data._id
+          );
+          this.integrantes[index].nombre = res.data.nombre;
+          this.integrantes[index].apellido = res.data.apellido;
+          this.integrantes[index].cargo = res.data.cargo;
+          this.integrantes[index].imagen = res.data.imagen;
+          this.mensaje.color = "success";
+          this.mensaje.texto = "Integrante Modificado";
+          this.showAlert();
+          this.editar = false;
+        })
+        .catch((e) => {
+          console.log(e.response);
+        });
+    },
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
+    },
+  },
+};
+</script>
+
+<style scoped>
+table{
+    color: #11c8ce;
+    width: 1200px !important;
+  
+}
+td{
+    color: #000000 !important;
+}
+.contenedor{
+    border:10px solid rgba(225, 219, 219, 0.734);
+    padding: 20px;
+    border-radius: 4%;
+    background: rgb(196, 192, 192);
+       color: #ffffff;
+}
+button {
+  margin: auto;
+  width: 100%;
+  padding: 10px 20px;
+  background: #029102;
+  border: none;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+.btt {
+  position: sticky;
+  left: 0;
+  z-index: 10000;
+  background: rgb(196, 192, 192);
+}
+.bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px !important;
+  color: #ffffff;
+  background: red !important;
+}
+th {
+  color: #000000;
+  background: rgb(228, 224, 224) !important;
+}
+form {
+  margin-left: 12px;
+  color: #ffffff;
+
+  
+}
+
+
+
+input{
+    border: none;
+    background: transparent;
+    border-bottom: 3px solid rgb(144, 148, 148);
+    outline: none;
+}
+input:focus{
+    border: none;
+    background: transparent;
+    border-bottom: 3px solid rgb(11, 179, 25);
+    outline: none;
+}
+form{
+   border: none;
+}
+
+input:hover{
+    border: none;
+    background: transparent;
+    border-bottom: 3px solid rgb(211, 203, 209);
+    outline: none;
+}
+input:active{
+    border: none;
+    background: transparent;
+    border-bottom: 3px solid rgb(168, 11, 129);
+    outline: none;
+}
+
+</style>
