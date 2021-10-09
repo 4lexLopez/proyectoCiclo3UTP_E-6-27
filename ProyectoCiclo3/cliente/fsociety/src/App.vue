@@ -8,7 +8,7 @@
 
 
     <keep-alive>
-     <cabe-zera></cabe-zera>
+    <foo-ter></foo-ter>
  
       </keep-alive>
      
@@ -18,17 +18,17 @@
 </template>
 
 <script>
-import CabeZera from './components/CabeZera.vue'
 import Navbar from './components/Navbar.vue'
+import FooTer from './components/FooTer.vue'
 
 
 
 export default {
-  components: { Navbar,CabeZera},
+  components: { Navbar, FooTer},
 
 }
-</script
-    CabeZera>
+</script>
+   
 
 
 <style>

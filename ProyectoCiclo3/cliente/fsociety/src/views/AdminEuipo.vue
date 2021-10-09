@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="contenedor">
-      <h1 class="text-center">integrantes</h1>
+      <h1 class="text-center" id="ir">INTEGRANTES</h1>
 
       <form
         @submit.prevent="ModificarIntegrante(editarIntegrante)"
@@ -11,25 +11,22 @@
 
         <input
           type="text"
-          
           placeholder="Nombre"
           v-model="editarIntegrante.nombre"
         />
         <input
           type="text"
-          class="form-control my-2"
+          required
           placeholder="Apellido"
           v-model="editarIntegrante.apellido"
         />
         <input
           type="text"
-          class="form-control my-2"
           placeholder="Cargo"
           v-model="editarIntegrante.cargo"
         />
         <input
           type="text"
-          class="form-control my-2"
           placeholder="Pon la Url de tú imagen"
           v-model="editarIntegrante.imagen"
         />
@@ -40,30 +37,33 @@
           Cancelar
         </button>
       </form>
-      <form @submit.prevent="agregarIntegrante()" v-if="!editar">
+      <form
+        @submit.prevent="agregarIntegrante(), scrollInto('agregado')"
+        v-if="!editar"
+      >
         <h3>Agregar un nuevo integrante</h3>
 
         <input
           type="text"
-          class="form-control my-2"
+          required
           placeholder="Nombre"
           v-model="equipo.nombre"
         />
         <input
           type="text"
-          class="form-control my-2"
+          required
           placeholder="Apellido"
           v-model="equipo.apellido"
         />
         <input
           type="text"
-          class="form-control my-2"
+          required
           placeholder="Cargo"
           v-model="equipo.cargo"
         />
         <input
           type="text"
-          class="form-control my-2"
+          required
           placeholder="Url de tú imagen"
           v-model="equipo.imagen"
         />
@@ -94,7 +94,7 @@
                     </button>
                     <button
                       class="btn-warning"
-                      @click="activarEdicion(item._id)"
+                      @click="activarEdicion(item._id), scrollInto('ir')"
                     >
                       Editar
                     </button>
@@ -107,6 +107,8 @@
               </tr>
             </tbody>
           </table>
+          <div id="agregado"></div>
+          <!-- <button @click="scrollInto('ir')">Ir Elemento1</button> -->
         </div>
       </div>
     </div>
@@ -145,6 +147,13 @@ export default {
         });
     },
 
+    scrollInto(elementId) {
+      const section = document.querySelector(`#${elementId}`);
+      section.scrollIntoView({
+        behavior: "smooth",
+      });
+    },
+
     agregarIntegrante() {
       this.axios
         .post("/equipo-nuevo", this.equipo)
@@ -154,30 +163,43 @@ export default {
           this.equipo.apellido = "";
           this.equipo.cargo = "";
           this.equipo.imagen = "";
-          this.mensaje.color = "success";
-          this.mensaje.texto = "Integrante Agregado";
-          this.showAlert();
         })
         .catch((e) => {
           console.log(e.response);
         });
+      swal("Integrante Agregado!", "Oprime el boton!", "success");
     },
 
     eliminarIntegrante(id) {
-      this.axios
-        .delete(`/equipo/${id}`)
-        .then((res) => {
-          const index = this.integrantes.findIndex(
-            (item) => item._id === res.data._id
-          );
-          this.integrantes.splice(index, 1);
-          this.mensaje.color = "success";
-          this.mensaje.texto = "Integrante Eliminado";
-          this.showAlert();
-        })
-        .catch((e) => {
-          console.log(e.response);
-        });
+      swal({
+        title: "¿Estás seguro??",
+        text:
+          "Una vez eliminado, ¡no podrás recuperarlo",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          this.axios
+          .delete(`/equipo/${id}`)
+          .then((res) => {
+            const index = this.integrantes.findIndex(
+              (item) => item._id === res.data._id
+            );
+            this.integrantes.splice(index, 1);
+          })
+          .catch((e) => {
+            console.log(e.response);
+          });
+          
+          swal("", {
+            icon: "success",
+          });
+        } else {
+          swal("Operación cancelada");
+        }
+
+        
+      });
     },
 
     activarEdicion(id) {
@@ -203,14 +225,13 @@ export default {
           this.integrantes[index].apellido = res.data.apellido;
           this.integrantes[index].cargo = res.data.cargo;
           this.integrantes[index].imagen = res.data.imagen;
-          this.mensaje.color = "success";
-          this.mensaje.texto = "Integrante Modificado";
-          this.showAlert();
           this.editar = false;
         })
         .catch((e) => {
           console.log(e.response);
         });
+
+      swal("Integrante Modificado!", "Oprime el botón", "success");
     },
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
@@ -223,26 +244,45 @@ export default {
 </script>
 
 <style scoped>
-table{
-    color: #11c8ce;
-    width: 1200px !important;
-  
+table {
+  color: #11c8ce;
 }
-td{
-    color: #000000 !important;
+td {
+  color: #000000 !important;
 }
-.contenedor{
-    border:10px solid rgba(225, 219, 219, 0.734);
-    padding: 20px;
-    border-radius: 4%;
-    background: rgb(196, 192, 192);
-       color: #ffffff;
+.contenedor {
+  border: 10px solid rgba(225, 219, 219, 0.734);
+  padding: 20px;
+  border-radius: 4%;
+  background: rgb(196, 192, 192);
+  color: #ffffff;
 }
+
+@media (max-width: 500px) {
+.contenedor {
+  outline: 10px solid rgb(196, 192, 192);;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  background: rgb(196, 192, 192);
+  color: #ffffff;
+}
+button {
+  margin: auto;
+  width: 90%;
+  padding: 10px 20px;
+  background: #477886;
+  border: none;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+}
+
 button {
   margin: auto;
   width: 100%;
   padding: 10px 20px;
-  background: #029102;
+  background: #477886;
   border: none;
   color: #ffffff;
   margin-bottom: 2px;
@@ -259,7 +299,7 @@ button {
   align-items: center;
   width: 130px !important;
   color: #ffffff;
-  background: red !important;
+  background: rgb(255, 0, 0) !important;
 }
 th {
   color: #000000;
@@ -268,39 +308,42 @@ th {
 form {
   margin-left: 12px;
   color: #ffffff;
-
-  
+  display: flex;
+  flex-direction: column;
 }
 
+input {
+  border: none;
+  background: transparent;
+  border-bottom: 3px solid rgb(144, 148, 148);
+  outline: none;
+  margin-bottom: 10px;
 
-
-input{
-    border: none;
-    background: transparent;
-    border-bottom: 3px solid rgb(144, 148, 148);
-    outline: none;
+  color: rgb(0, 0, 0);
 }
-input:focus{
-    border: none;
-    background: transparent;
-    border-bottom: 3px solid rgb(11, 179, 25);
-    outline: none;
+::placeholder {
+  color: rgb(255, 255, 255);
 }
-form{
-   border: none;
+input:focus {
+  border: none;
+  background: transparent;
+  border-bottom: 3px solid rgb(119, 192, 125) !important;
+  outline: none !important;
 }
-
-input:hover{
-    border: none;
-    background: transparent;
-    border-bottom: 3px solid rgb(211, 203, 209);
-    outline: none;
-}
-input:active{
-    border: none;
-    background: transparent;
-    border-bottom: 3px solid rgb(168, 11, 129);
-    outline: none;
+form {
+  border: none;
 }
 
+input:hover {
+  border: none;
+  background: transparent;
+  border-bottom: 3px solid rgb(211, 203, 209);
+  outline: none;
+}
+input:active {
+  border: none;
+  background: transparent;
+  border-bottom: 3px solid rgb(168, 11, 129);
+  outline: none;
+}
 </style>

@@ -25,6 +25,8 @@
               <p class="card-text text-center">{{ item.cargo }}</p>
             </div>
           </div>
+
+          
         </div>
       </section>
     </div>
@@ -36,9 +38,6 @@ export default {
   data() {
     return {
       equipo: [],
-      mensaje: { color: "success", texto: "" },
-      dismissSecs: 5,
-      dismissCountDown: 0,
     };
   },
 
@@ -51,20 +50,24 @@ export default {
       this.axios
         .get("/equipo")
         .then((res) => {
-          console.log(res.data);
           this.equipo = res.data;
         })
         .catch((e) => {
-          console.log(e.response);
+
         });
     },
-  },
-  components: { CabeZera },
-};
-import CabeZera from "../components/CabeZera.vue";
-</script>
 
-<style>
+    
+    
+  },
+  components: { FooTer },
+};
+
+import FooTer from "../components/FooTer.vue";
+</script>
+<style scoped>
+
+
 .center_text {
   text-align: justify;
 }
@@ -81,7 +84,7 @@ import CabeZera from "../components/CabeZera.vue";
   -moz-border-radius: 94px 15px 132px 3px;
   -webkit-border-radius: 94px 15px 102px 3px;
 
-  background: rgb(255, 230, 0);
+  background: rgba(255, 230, 0, 0.83);
 }
 
 .img img {
