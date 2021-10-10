@@ -25,13 +25,14 @@
           <div class="col-md-6">
             <div class="right-content">
               <div class="container">
-                <form id="contact" >
+                <form @submit.prevent="sendEmail" id="contact" >
                   <div class="row row__container">
                     <div class="col-md-12">
                       <fieldset>
                         <input
                           class="input__styles"
                           name="name"
+                          v-model="name"
                           type="text"
                           id="name"
                           placeholder="Nombre"
@@ -44,6 +45,7 @@
                         <input
                           class="input__styles"
                           name="email"
+                          v-model="email"
                           type="email"
                           id="email"
                           placeholder="example@gmail.com"
@@ -56,7 +58,8 @@
                         <input
                           class="input__styles"
                           name="subject"
-                          type="text"
+                          v-model="subject"
+                          type="text-area"
                           id="subject"
                           placeholder="Asunto"
                           required=""
@@ -68,6 +71,7 @@
                         <textarea
                           class="textarea__styles"
                           name="message"
+                          v-model="message"
                           rows="6"
                           id="message"
                           placeholder="Escribe tu mensaje"
@@ -77,7 +81,7 @@
                     </div>
                     <div class="col-md-12">
                       <fieldset>
-                        <button preven type="submit"  class="button">
+                        <button type="submit" class="button">
                           Enviar mensaje
                         </button>
                       </fieldset>
@@ -94,8 +98,40 @@
 </template>
 
 <script>
+// we are going to use emailjs to let the clients contact us using a simple form
+import emailjs from 'emailjs-com';
+
 export default {
   name: "Contactanos",
+  data() {
+    return {
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    }
+  },
+  methods: {
+    sendEmail(e) {
+      try {
+        emailjs.sendForm('service_wfzgxwu', 'template_aie97te', e.target, 'user_B2YwIp12nE1rsTDjMG47K', {
+          name: this.name,
+          email: this.email,
+          subject: this.subject,
+          message: this.meessage
+        })
+        console.log('it works!!!');
+        swal("Mensaje enviado exitosamente!", "success");
+      } catch (error) {
+          console.log({error})
+      }
+      // Reset form field
+      this.name = ''
+      this.email = ''
+      this.subject = ''
+      this.message = ''
+    },
+  }
 };
 </script>
 
