@@ -10,23 +10,22 @@
         <h3 class="text-center">Editar equipo</h3>
 
         <input
-          type="text"
+          type="text" required
           placeholder="Nombre"
           v-model="editarIntegrante.nombre"
         />
         <input
-          type="text"
-          required
+          type="text" required
           placeholder="Apellido"
           v-model="editarIntegrante.apellido"
         />
         <input
-          type="text"
+          type="text" required
           placeholder="Cargo"
           v-model="editarIntegrante.cargo"
         />
         <input
-          type="text"
+          type="text" required
           placeholder="Pon la Url de tú imagen"
           v-model="editarIntegrante.imagen"
         />
@@ -255,7 +254,7 @@ td {
   padding: 20px;
   border-radius: 4%;
   background: rgb(196, 192, 192);
-  color: #ffffff;
+  color: #000000;
 }
 
 @media (max-width: 500px) {
@@ -265,7 +264,7 @@ td {
   padding: 0;
   border-radius: 0;
   background: rgb(196, 192, 192);
-  color: #ffffff;
+  color: #000000;
 }
 button {
   margin: auto;
@@ -273,8 +272,9 @@ button {
   padding: 10px 20px;
   background: #477886;
   border: none;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 2px;
+  font-weight: bolder;
 }
 }
 
@@ -284,8 +284,9 @@ button {
   padding: 10px 20px;
   background: #477886;
   border: none;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 2px;
+  font-weight: bolder;
 }
 .btt {
   position: sticky;
@@ -298,7 +299,7 @@ button {
   justify-content: center;
   align-items: center;
   width: 130px !important;
-  color: #ffffff;
+  color: #000000;
   background: rgb(255, 0, 0) !important;
 }
 th {
@@ -307,7 +308,7 @@ th {
 }
 form {
   margin-left: 12px;
-  color: #ffffff;
+  color: #000000;
   display: flex;
   flex-direction: column;
 }
@@ -322,7 +323,7 @@ input {
   color: rgb(0, 0, 0);
 }
 ::placeholder {
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 input:focus {
   border: none;

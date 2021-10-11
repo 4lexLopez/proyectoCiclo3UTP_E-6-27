@@ -4,8 +4,8 @@
       <div class="container-fluid">
         <li class="nav-item li__logo">
           <img
-            class="w-25 ul"
-            src="https://i.ibb.co/ZVxtM0b/header-logo.png"
+            class="w-50 ul"
+            src="https://i.postimg.cc/rFHtLPLH/logo-white-large.png"
             alt=""
           />
         </li>

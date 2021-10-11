@@ -3,14 +3,12 @@
     <div class="contenedor">
       <h1 class="text-center" id="ir">Productos</h1>
 
-      <form
-        @submit.prevent="ModificarProductos(editarProducto)"
-        v-if="editar"
-      >
+      <form @submit.prevent="ModificarProductos(editarProducto)" v-if="editar">
         <h3 class="text-center">Editar Productos</h3>
 
         <input
           type="text"
+          required
           placeholder="Nombre del producto"
           v-model="editarProducto.nombre"
         />
@@ -22,10 +20,11 @@
         />
         <input
           type="text"
+          required
           placeholder="Url de la imagen del producto"
           v-model="editarProducto.imagen"
         />
-       
+
         <button class="btn btn-primary" id="liveAlertBtn " type="submit">
           Editar
         </button>
@@ -33,17 +32,18 @@
           Cancelar
         </button>
       </form>
-      <form
+      <form autocomplete="off"
         @submit.prevent="agregarproducto(), scrollInto('agregado')"
         v-if="!editar"
       >
         <h3>Agregar un nuevo Producto</h3>
 
-        <input
+        <input 
           type="text"
+          id="tex"
           required
           placeholder="Nombre del Producto"
-          v-model="producto.nombre"
+          v-model="producto.nombre" 
         />
         <input
           type="text"
@@ -53,11 +53,20 @@
         />
         <input
           type="text"
+          id="tex"
           required
           placeholder="Url de la imagen del producto"
-          v-model="producto.imagen"
+          v-model="producto.imagen" @click="habilitar()"
         />
-        <button class="btn-success my-2" type="submit">Agregar</button>
+        <button 
+          id="btn"
+          class="btn-success my-2"
+          type="submit" 
+         
+        
+        >
+          Agregar
+        </button>
       </form>
 
       <div class="container">
@@ -66,7 +75,7 @@
             <thead>
               <tr>
                 <th class="btt" scope="col">Editar</th>
-                <th scope="col">Nombre del Producto </th>
+                <th scope="col">Nombre del Producto</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Url imagen del producto</th>
               </tr>
@@ -83,7 +92,9 @@
                     </button>
                     <button
                       class="btn-warning"
-                      @click="activarEdiciondelproducto(item._id), scrollInto('ir')"
+                      @click="
+                        activarEdiciondelproducto(item._id), scrollInto('ir')
+                      "
                     >
                       Editar
                     </button>
@@ -94,29 +105,36 @@
                 <td>{{ item.imagen }}</td>
               </tr>
             </tbody>
-          </table >
-          
+          </table>
+
+          <div id="agregado"></div>
         </div>
       </div>
     </div>
-  
   </div>
 </template>
 
 <script>
+
 export default {
+ 
   data() {
     return {
       productos: [],
       producto: { nombre: "", precio: "", imagen: "" },
       editar: false,
       editarProducto: {},
+
     };
+
   },
+
+  
 
   created() {
     this.listarproductos();
   },
+
 
   methods: {
     listarproductos() {
@@ -130,6 +148,13 @@ export default {
           console.log(e.response);
         });
     },
+
+
+   
+
+  
+
+
 
     scrollInto(elementId) {
       const section = document.querySelector(`#${elementId}`);
@@ -156,32 +181,29 @@ export default {
     elimarproducto(id) {
       swal({
         title: "¿Estás seguro??",
-        text:
-          "Una vez eliminado, ¡no podrás recuperarlo",
+        text: "Una vez eliminado, ¡no podrás recuperarlo",
         buttons: true,
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
           this.axios
-          .delete(`/producto/${id}`)
-          .then((res) => {
-            const index = this.productos.findIndex(
-              (item) => item._id === res.data._id
-            );
-            this.productos.splice(index, 1);
-          })
-          .catch((e) => {
-            console.log(e.response);
-          });
-          
+            .delete(`/producto/${id}`)
+            .then((res) => {
+              const index = this.productos.findIndex(
+                (item) => item._id === res.data._id
+              );
+              this.productos.splice(index, 1);
+            })
+            .catch((e) => {
+              console.log(e.response);
+            });
+
           swal("", {
             icon: "success",
           });
         } else {
           swal("Operacón Cancelada!");
         }
-
-        
       });
     },
 
@@ -201,9 +223,7 @@ export default {
       this.axios
         .put(`/producto/${item._id}`, item)
         .then((res) => {
-          const index = this.productos.findIndex(
-            (n) => n._id === res.data._id
-          );
+          const index = this.productos.findIndex((n) => n._id === res.data._id);
           this.productos[index].nombre = res.data.nombre;
           this.productos[index].precio = res.data.precio;
           this.productos[index].imagen = res.data.imagen;
@@ -222,6 +242,7 @@ export default {
       this.dismissCountDown = this.dismissSecs;
     },
   },
+
 };
 </script>
 
@@ -237,26 +258,26 @@ td {
   padding: 20px;
   border-radius: 4%;
   background: rgb(196, 192, 192);
-  color: #ffffff;
+  color: #000000;
 }
 @media (max-width: 500px) {
-.contenedor {
-  outline: 10px solid rgb(196, 192, 192);;
-  border: 0;
-  padding: 0;
-  border-radius: 0;
-  background: rgb(196, 192, 192);
-  color: #ffffff;
-}
-button {
-  margin: auto;
-  width: 90%;
-  padding: 10px 20px;
-  background: #477886;
-  border: none;
-  color: #ffffff;
-  margin-bottom: 2px;
-}
+  .contenedor {
+    outline: 10px solid rgb(196, 192, 192);
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    background: rgb(196, 192, 192);
+    color: #000000;
+  }
+  button {
+    margin: auto;
+    width: 90%;
+    padding: 10px 20px;
+    background: #477886;
+    border: none;
+    color: #000000;
+    margin-bottom: 2px;
+  }
 }
 button {
   margin: auto;
@@ -264,8 +285,9 @@ button {
   padding: 10px 20px;
   background: #477886;
   border: none;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 2px;
+  font-weight: bolder;
 }
 .btt {
   position: sticky;
@@ -278,7 +300,7 @@ button {
   justify-content: center;
   align-items: center;
   width: 130px !important;
-  color: #ffffff;
+  color: #000000;
   background: rgb(255, 0, 0) !important;
 }
 th {
@@ -287,7 +309,7 @@ th {
 }
 form {
   margin-left: 12px;
-  color: #ffffff;
+  color: #000000;
   display: flex;
   flex-direction: column;
 }
@@ -302,7 +324,7 @@ input {
   color: rgb(0, 0, 0);
 }
 ::placeholder {
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 input:focus {
   border: none;

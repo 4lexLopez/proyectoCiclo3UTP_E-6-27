@@ -28,7 +28,7 @@ export default {
 <style>
 .footer {
   width: 100%;
-  height: 10rem !important;
+  height: 10.9rem !important;
   font-size: 20px;
   height: 5rem;
   background: rgb(0, 0, 0);

@@ -21,8 +21,9 @@ const routes = [
   {
     path: '/editarproducto',
     name: 'EditarProductos',
-    component: () => import('../views/EditarProductos.vue')
+    component: () => import('../views/EditarProductos.vue'),
   },
+ 
 
   {
     path: '/adminEquipo',
