@@ -34,4 +34,15 @@ export default {
 <style>
 
 
+.contenedorprincipal {
+
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-content: center;
+ min-height: calc(100vh - 240px);
+
+  
+}
+
 </style>

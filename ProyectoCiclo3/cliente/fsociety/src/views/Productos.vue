@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="contenedorprincipal">
   <h1 class="center">
       Listas de Productos
   </h1>
@@ -17,7 +17,12 @@
               <h5 class="card-title text-center">{{ item.nombre }}</h5>
               
               <h5 class="card-title text-center textColor">{{ item.precio }}</h5>
-          <button class="btn btn-primary button__center" @click="DetallesProducto(),activarEdicion(item._id)"> obtener</button>
+              <router-link :to="{
+                name: 'detallesproducto',params:{id:item}
+              }">
+                
+           <button class="btn btn-primary button__center" @click="DetallesProducto(),activarEdicion(item._id)"> obtener</button>
+          </router-link>
             </div>
           </div>
           

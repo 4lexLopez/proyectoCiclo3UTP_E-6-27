@@ -1,7 +1,7 @@
-import express from 'express';
-import morgan from 'morgan';
-import cors from 'cors';
-import path from 'path';
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const path = require('path');
 
 
 const app = express()
@@ -25,7 +25,6 @@ mongoose.connect(uri, options).then(
 // Middleware
 app.use(morgan('tiny'));
 app.use(cors());
-
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }))
@@ -33,6 +32,7 @@ app.use(express.urlencoded({ extended: true }))
 // Rutas
 app.use('/api', require('./route/equipo'));
 app.use('/api', require('./route/producto'));
+app.use('/api', require('./route/Usuarios'));
 
 
 const history = require('connect-history-api-fallback'); 

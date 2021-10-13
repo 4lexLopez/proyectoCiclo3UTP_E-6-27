@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid contenedorprincipal">
     <div class="contact-page">
       <div class="container">
         <div class="row">
@@ -103,6 +103,7 @@ import emailjs from 'emailjs-com';
 
 export default {
   name: "Contactanos",
+ 
   data() {
     return {
       name: '',
@@ -110,6 +111,7 @@ export default {
       subject: '',
       message: ''
     }
+
   },
   methods: {
     sendEmail(e) {

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const equipoSchema = new Schema({
     imagen: {type: String, required: [true, 'Imagen obligatoria']},
@@ -11,4 +11,4 @@ const equipoSchema = new Schema({
 });
 // convertir a modelo
 const Equipo = mongoose.model('Equipo', equipoSchema);
-export default Equipo;
+module.exports= Equipo;

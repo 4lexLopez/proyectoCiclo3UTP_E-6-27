@@ -1,6 +1,6 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
-import Producto from "../model/Productos";
+const Producto = require("../model/Productos");
 
 router.post('/producto-nuevo', async (req, res) => {
 

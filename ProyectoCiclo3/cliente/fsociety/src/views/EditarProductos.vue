@@ -1,4 +1,5 @@
 <template>
+<div class="contenedorprincipal">
   <div class="container">
     <div class="contenedor">
       <h1 class="text-center" id="ir">Productos</h1>
@@ -32,18 +33,19 @@
           Cancelar
         </button>
       </form>
-      <form autocomplete="off"
+      <form
+        autocomplete="off"
         @submit.prevent="agregarproducto(), scrollInto('agregado')"
         v-if="!editar"
       >
         <h3>Agregar un nuevo Producto</h3>
 
-        <input 
+        <input
           type="text"
           id="tex"
           required
           placeholder="Nombre del Producto"
-          v-model="producto.nombre" 
+          v-model="producto.nombre"
         />
         <input
           type="text"
@@ -56,15 +58,10 @@
           id="tex"
           required
           placeholder="Url de la imagen del producto"
-          v-model="producto.imagen" @click="habilitar()"
+          v-model="producto.imagen"
+          @click="habilitar()"
         />
-        <button 
-          id="btn"
-          class="btn-success my-2"
-          type="submit" 
-         
-        
-        >
+        <button id="btn" class="btn-success my-2" type="submit">
           Agregar
         </button>
       </form>
@@ -106,37 +103,64 @@
               </tr>
             </tbody>
           </table>
-
           <div id="agregado"></div>
+          <button type="button" class="btn btn-danger" @click="cerrar">
+            Cerrar sección
+          </button>
         </div>
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
-
 export default {
- 
+  name: "editarProducto",
+
+  beforeCreate() {
+    var auntenticacion2 = window.localStorage.getItem("auntenticacion");
+    if (auntenticacion2 !== "ok") {
+      this.$router.push("/login");
+    }
+  },
+
   data() {
     return {
       productos: [],
       producto: { nombre: "", precio: "", imagen: "" },
       editar: false,
       editarProducto: {},
-
     };
-
   },
-
-  
 
   created() {
     this.listarproductos();
   },
 
-
   methods: {
+    cerrar() {
+      swal({
+        title: "Estás seguro?",
+       
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((sesion) => {
+        if (sesion) {
+            window.localStorage.removeItem("auntenticacion");
+      this.$router.push("/login");
+          swal("Cierre Exitoso", {
+            icon: "success",
+            
+          });
+        } else {
+          swal("Acción Cancelada!");
+        }
+      });
+    
+    },
+
     listarproductos() {
       this.axios
         .get("/producto")
@@ -148,13 +172,6 @@ export default {
           console.log(e.response);
         });
     },
-
-
-   
-
-  
-
-
 
     scrollInto(elementId) {
       const section = document.querySelector(`#${elementId}`);
@@ -242,7 +259,6 @@ export default {
       this.dismissCountDown = this.dismissSecs;
     },
   },
-
 };
 </script>
 
@@ -253,6 +269,7 @@ table {
 td {
   color: #000000 !important;
 }
+
 .contenedor {
   border: 10px solid rgba(225, 219, 219, 0.734);
   padding: 20px;

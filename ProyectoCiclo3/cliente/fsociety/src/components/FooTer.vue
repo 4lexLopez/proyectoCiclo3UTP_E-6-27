@@ -5,8 +5,8 @@
         <div class="row">
           <div class="col-md-12">
             <div class="logo">
-              <img
-                src="https://i.ibb.co/ZVxtM0b/header-logo.png"
+              <img 
+                src="https://i.postimg.cc/rFHtLPLH/logo-white-large.png"
                 class="w-25"
                 alt=""
               />
@@ -26,18 +26,19 @@ export default {
 </script>
 
 <style>
+
 .footer {
   width: 100%;
-  height: 10.9rem !important;
   font-size: 20px;
-  height: 5rem;
-  background: rgb(0, 0, 0);
+  height: 174px;
+  background: rgb(29, 26, 26);
   color: rgb(255, 255, 255);
   display: flex;
-  line-height: 3;
+  line-height: 50px;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   text-align: center;
+ 
 }
 </style>

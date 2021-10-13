@@ -1,5 +1,7 @@
 <template>
+<div class="contenedorprincipal">
   <div class="container">
+    
     <div class="contenedor">
       <h1 class="text-center" id="ir">INTEGRANTES</h1>
 
@@ -107,17 +109,33 @@
             </tbody>
           </table>
           <div id="agregado"></div>
+          <button type="button" class="btn btn-danger" @click="cerrar">Cerrar sección</button>
           <!-- <button @click="scrollInto('ir')">Ir Elemento1</button> -->
         </div>
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
+
 export default {
+
+  name:'AdminEquipo',
+   beforeCreate() {
+    var auntenticacion = window.localStorage.getItem('auntenticacion');
+    console.log("esta auntenticado "+auntenticacion);
+    if(auntenticacion!=='ok'){
+      this.$router.push("/login").catch(()=>{});
+    }
+
+    
+    },
+
   data() {
     return {
+      login:1,
       integrantes: [],
       mensaje: { color: "success", texto: "" },
       dismissSecs: 5,
@@ -134,6 +152,28 @@ export default {
   },
 
   methods: {
+
+   cerrar() {
+      swal({
+        title: "Estás seguro?",
+       
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((sesion) => {
+        if (sesion) {
+            window.localStorage.removeItem("auntenticacion");
+      this.$router.push("/login");
+          swal("Cierre Exitoso", {
+            icon: "success",
+            
+          });
+        } else {
+          swal("Acción Cancelada!");
+        }
+      });
+    
+    },
     listarintegrantes() {
       this.axios
         .get("/equipo")
