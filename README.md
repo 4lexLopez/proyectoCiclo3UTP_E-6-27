@@ -30,7 +30,7 @@ Equipo de desarroladores:
   - **Sebastian Pareja Lozano** (sebastian200431@gmail.com)
 
 Scrum Master:
-  - **Alex Roman Lopez Coy** (scrum.master@mail.com)
+  - **Alex Roman Lopez Coy** (alex.roman.lopez@gmail.com)
 
 Product Owner:
   - **David Valero** (product.owner@acme.com)
