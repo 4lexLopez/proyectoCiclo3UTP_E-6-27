@@ -15,7 +15,7 @@
           v-model="from.pass"
         />
       </div>
-      <button type="submit" class="btn btn-primary">Iniciar seción</button>
+      <button type="submit" class="btn btn-primary">Iniciar sesión</button>
     </form>
   </div>
   </div>
