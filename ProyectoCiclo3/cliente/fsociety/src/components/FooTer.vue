@@ -13,7 +13,7 @@
             </div>
           </div>
         </div>
-        <h3>Todolos derechos reservador a FSociety &copy;</h3>
+        <h3>Todos los derechos reservados a FSociety &copy;</h3>
       </div>
     </footer>
   </div>

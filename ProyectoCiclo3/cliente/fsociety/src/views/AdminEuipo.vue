@@ -109,7 +109,7 @@
             </tbody>
           </table>
           <div id="agregado"></div>
-          <button type="button" class="btn btn-danger" @click="cerrar">Cerrar sección</button>
+          <button type="button" class="btn btn-danger" @click="cerrar">Cerrar sesión</button>
           <!-- <button @click="scrollInto('ir')">Ir Elemento1</button> -->
         </div>
       </div>

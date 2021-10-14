@@ -105,7 +105,7 @@
           </table>
           <div id="agregado"></div>
           <button type="button" class="btn btn-danger" @click="cerrar">
-            Cerrar sección
+            Cerrar sesión
           </button>
         </div>
       </div>
