@@ -165,7 +165,7 @@ export default {
       this.axios
         .get("/producto")
         .then((res) => {
-          console.log(res.data);
+  
           this.productos = res.data;
         })
         .catch((e) => {

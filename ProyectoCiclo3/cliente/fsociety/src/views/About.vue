@@ -25,8 +25,6 @@
               <p class="card-text text-center">{{ item.cargo }}</p>
             </div>
           </div>
-
-          
         </div>
       </section>
     </div>
@@ -52,13 +50,8 @@ export default {
         .then((res) => {
           this.equipo = res.data;
         })
-        .catch((e) => {
-
-        });
+        .catch((e) => {});
     },
-
-    
-    
   },
   components: { FooTer },
 };
@@ -66,17 +59,31 @@ export default {
 import FooTer from "../components/FooTer.vue";
 </script>
 <style scoped>
-
-.contenedor{
- background: rgb(134,158,201);
-background: -moz-linear-gradient(144deg, rgba(134,158,201,1) 0%, rgba(26,80,73,1) 0%, rgba(0,0,0,1) 61%);
-background: -webkit-linear-gradient(144deg, rgba(134,158,201,1) 0%, rgba(26,80,73,1) 0%, rgba(0,0,0,1) 61%);
-background: linear-gradient(144deg, rgba(134,158,201,1) 0%, rgba(26,80,73,1) 0%, rgba(0,0,0,1) 61%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#869ec9",endColorstr="#000000",GradientType=1);
-
+.contenedor {
+  background: rgb(134, 158, 201);
+  background: -moz-linear-gradient(
+    144deg,
+    rgba(134, 158, 201, 1) 0%,
+    rgba(26, 80, 73, 1) 0%,
+    rgba(0, 0, 0, 1) 61%
+  );
+  background: -webkit-linear-gradient(
+    144deg,
+    rgba(134, 158, 201, 1) 0%,
+    rgba(26, 80, 73, 1) 0%,
+    rgba(0, 0, 0, 1) 61%
+  );
+  background: linear-gradient(
+    144deg,
+    rgba(134, 158, 201, 1) 0%,
+    rgba(26, 80, 73, 1) 0%,
+    rgba(0, 0, 0, 1) 61%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#869ec9",endColorstr="#000000",GradientType=1);
 }
-p,h2{
-  color:#ffff
+p,
+h2 {
+  color: #ffff;
 }
 .center_text {
   text-align: justify;
@@ -93,12 +100,27 @@ p,h2{
   border-radius: 94px 15px 132px 3px;
   -moz-border-radius: 94px 15px 132px 3px;
   -webkit-border-radius: 94px 15px 102px 3px;
-background: rgb(134,158,201);
-background: -moz-linear-gradient(80deg, rgba(134,158,201,1) 0%, rgba(26,34,80,1) 22%, rgba(26,80,73,1) 61%);
-background: -webkit-linear-gradient(80deg, rgba(134,158,201,1) 0%, rgba(26,34,80,1) 22%, rgba(26,80,73,1) 61%);
-background: linear-gradient(80deg, rgba(134,158,201,1) 0%, rgba(26,34,80,1) 22%, rgba(26,80,73,1) 61%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#869ec9",endColorstr="#1a5049",GradientType=1);
-color: #ffff;
+  background: rgb(134, 158, 201);
+  background: -moz-linear-gradient(
+    80deg,
+    rgba(134, 158, 201, 1) 0%,
+    rgba(26, 34, 80, 1) 22%,
+    rgba(26, 80, 73, 1) 61%
+  );
+  background: -webkit-linear-gradient(
+    80deg,
+    rgba(134, 158, 201, 1) 0%,
+    rgba(26, 34, 80, 1) 22%,
+    rgba(26, 80, 73, 1) 61%
+  );
+  background: linear-gradient(
+    80deg,
+    rgba(134, 158, 201, 1) 0%,
+    rgba(26, 34, 80, 1) 22%,
+    rgba(26, 80, 73, 1) 61%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#869ec9",endColorstr="#1a5049",GradientType=1);
+  color: #ffff;
 }
 
 .img img {
@@ -108,6 +130,5 @@ color: #ffff;
   border-radius: 94px 15px 132px 3px;
   -moz-border-radius: 94px 15px 132px 3px;
   -webkit-border-radius: 94px 15px 132px 3px;
-
 }
 </style>

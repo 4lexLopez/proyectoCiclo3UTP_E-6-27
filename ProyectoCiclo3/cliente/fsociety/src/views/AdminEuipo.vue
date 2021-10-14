@@ -125,7 +125,6 @@ export default {
   name:'AdminEquipo',
    beforeCreate() {
     var auntenticacion = window.localStorage.getItem('auntenticacion');
-    console.log("esta auntenticado "+auntenticacion);
     if(auntenticacion!=='ok'){
       this.$router.push("/login").catch(()=>{});
     }
@@ -178,7 +177,6 @@ export default {
       this.axios
         .get("/equipo")
         .then((res) => {
-          console.log(res.data);
           this.integrantes = res.data;
         })
         .catch((e) => {

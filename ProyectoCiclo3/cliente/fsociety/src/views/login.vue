@@ -26,9 +26,11 @@
 export default {
   beforeCreate() {
     var auntenticacion = window.localStorage.getItem("auntenticacion");
-    if (auntenticacion !== "ok") {
-      this.$router.push("/login");
+    if (auntenticacion === "ok") {
+      this.$router.push("/");
     }
+      
+    
    
   },
 
@@ -48,8 +50,6 @@ export default {
         this.user = res.data;
 
         this.user.forEach((value, index) => {
-          console.log(value.nombre);
-          console.log(value.pass);
           if (
             this.from.nombre === value.nombre &&
             this.from.pass === value.pass

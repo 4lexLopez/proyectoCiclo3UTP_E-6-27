@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true }))
 // Rutas
 app.use('/api', require('./route/equipo'));
 app.use('/api', require('./route/producto'));
-app.use('/api', require('./route/Usuarios'));
+app.use('/api', require('./route/usuarios'));
 
 
 const history = require('connect-history-api-fallback'); 

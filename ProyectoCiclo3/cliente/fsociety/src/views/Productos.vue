@@ -17,12 +17,10 @@
               <h5 class="card-title text-center">{{ item.nombre }}</h5>
               
               <h5 class="card-title text-center textColor">{{ item.precio }}</h5>
-              <router-link :to="{
-                name: 'detallesproducto',params:{id:item}
-              }">
+           
                 
-           <button class="btn btn-primary button__center" @click="DetallesProducto(),activarEdicion(item._id)"> obtener</button>
-          </router-link>
+           <button class="btn btn-primary button__center" @click="DetallesProducto()"> obtener</button>
+        
             </div>
           </div>
           
@@ -53,11 +51,11 @@ export default {
       this.axios
         .get("/producto")
         .then((res) => {
-          console.log(res.data);
+  
           this.producto = res.data;
         })
         .catch((e) => {
-          console.log(e.response);
+       
         });
     },
     DetallesProducto(){
