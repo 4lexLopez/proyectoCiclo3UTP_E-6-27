@@ -43,7 +43,7 @@ router.get('/equipo', async (req, res) => {
         const equipoDB = await Equipo.find();
         res.json(equipoDB);
     } catch (error) {
-        return res.status(400).json({
+        return res.status(500).json({
             mensaje: 'Ocurrio un error',
             error
         })
